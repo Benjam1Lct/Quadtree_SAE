@@ -6,7 +6,6 @@ import "gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 // un terrain dont la case le plus en haut à gauche a pour coordonnées
 // (topLeftX, topLeftY)) à partir du qadtree q.
 func (q Quadtree) GetContent(topLeftX, topLeftY int, contentHolder [][]int) {
-	//main part
 	for i := 0; i < configuration.Global.NumTileX; i++ {
 		for j := 0; j < configuration.Global.NumTileY; j++ {
 			absX := topLeftX + i
