@@ -1,8 +1,3 @@
-import (
-	"fmt"
-	"testing" 
-)
-
 type Quadtree struct {
 	width, height int
 	root          *node
