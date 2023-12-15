@@ -35,20 +35,17 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 	}
 	defer file.Close()
 
-	// Scanner pour trouver la longueur maximale d'une ligne dans le fichier
 	max := bufio.NewScanner(file)
 	maxLength := 0
 
-	// Trouver la longueur maximale
 	for max.Scan() {
 		line := max.Text()
 		if len(line) > maxLength {
 			maxLength = len(line)
 		}
 	}
-	file.Seek(0, 0) // Réinitialiser la position du curseur du fichier au début
+	file.Seek(0, 0)
 
-	// Scanner pour lire le fichier et construire le tableau
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -64,7 +61,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 				}
 				tab = append(tab, num)
 			} else {
-				// Dans le cas où la ligne est plus courte que la longueur maximale
 				tab = append(tab, -1)
 			}
 		}

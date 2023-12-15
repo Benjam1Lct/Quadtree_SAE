@@ -2,32 +2,41 @@ package floor
 
 import (
 	"testing"
+
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 )
 
-func Test_size(t *testing.T) {
-	content := updateFromFileFloor(camXPos, camYPos)
-	if len(content) != Global.NumTileY {
+func TestUpdateFromFileFloorSize(t *testing.T) {
+	var f Floor
+	f.Init() // You may need to initialize the floor before testing
+	f.updateFromFileFloor(0, 0)
+
+	if len(f.content) != configuration.Global.NumTileY {
 		t.Fail()
 	}
-	for i := 0; i < len(content); i++ {
-		if content[i] != Global.NumTileX {
+
+	for i := 0; i < len(f.content); i++ {
+		if len(f.content[i]) != configuration.Global.NumTileX {
 			t.Fail()
 		}
 	}
 }
 
-func Test_out(t *testing.T) {
-	content := updateFromFileFloor(camXPos, camYPos)
-	for i := 0; i < len(content); i++ {
-		for j := 0; j < len(content[i]); j++ {
-			if content[i][j] == -1 {
-				if camYPos+len(content)/2 <= len(f.fullContent) {
+func TestUpdateFromFileFloorOut(t *testing.T) {
+	var f Floor
+	f.Init() // You may need to initialize the floor before testing
+	f.updateFromFileFloor(0, 0)
+
+	for i := 0; i < len(f.content); i++ {
+		for j := 0; j < len(f.content[i]); j++ {
+			if f.content[i][j] == -1 {
+				if 0+len(f.content)/2 <= len(f.fullContent) {
 					t.Fail()
-				} else if camYPos-len(content)/2 >= 0 {
+				} else if 0-len(f.content)/2 >= 0 {
 					t.Fail()
-				} else if camXPos+len(content[i])/2 <= len(f.fullContent[i]) {
+				} else if 0+len(f.content[i])/2 <= len(f.fullContent[i]) {
 					t.Fail()
-				} else if camXPos-len(content[i])/2 >= 0 {
+				} else if 0-len(f.content[i])/2 >= 0 {
 					t.Fail()
 				}
 			}
