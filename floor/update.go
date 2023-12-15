@@ -39,13 +39,14 @@ func (f *Floor) updateGridFloor(camXPos, camYPos int) {
 	}
 }
 
-// le sol est récupéré depuis un tableau, qui a été lu dans un fichier
+// updateFromFileFloor met à jour le contenu du sol à partir d'un tableau lu depuis un fichier.
+// Il prend en compte la position de la caméra (camXPos, camYPos) pour extraire la partie pertinente du tableau.
+// Les cases en dehors des limites du tableau d'origine sont remplies avec -1.
 func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
+	// Calcul des indices de la zone d'intérêt dans le tableau d'origine
 	inter_x := []int{camXPos - configuration.Global.NumTileX/2, (camXPos + configuration.Global.NumTileX/2) + configuration.Global.NumTileX%2}
 	inter_y := []int{camYPos - configuration.Global.NumTileY/2, (camYPos + configuration.Global.NumTileY/2) + configuration.Global.NumTileY%2}
 
-	//fmt.Println("inter_x=", inter_x)
-	//fmt.Println("inter_y=", inter_y)
 	// Réinitialiser le contenu actuel
 	f.content = make([][]int, (configuration.Global.NumTileY))
 
@@ -67,8 +68,6 @@ func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
 			}
 		}
 	}
-	//fmt.Println("fullContent=", f.fullContent)
-	//fmt.Println("content=", f.content)
 }
 
 // le sol est récupéré depuis un quadtree, qui a été lu dans un fichier

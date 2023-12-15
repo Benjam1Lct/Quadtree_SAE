@@ -12,6 +12,11 @@ func MakeFromArray(floorContent [][]int) (q Quadtree) {
 
 		Fonction qui récupère les données d'un tableau pour en faire un quadtree
 	*/
+
+	if len(floorContent) <= 0 {
+		return q
+	}
+
 	height := len(floorContent)
 	width := len(floorContent[0])
 
