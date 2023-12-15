@@ -1,11 +1,12 @@
 package floor
 
 import (
-	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
-	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 	"bufio"
 	"os"
 	"strconv"
+
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 )
 
 // Init initialise les structures de données internes de f.
@@ -28,28 +29,28 @@ func (f *Floor) Init() {
 func readFloorFromFile(fileName string) (floorContent [][]int) {
 	filePath := fileName
 
-    file, err := os.Open(filePath)
-    if err != nil {
-        return floorContent
-    }
-	
-    defer file.Close() 
+	file, err := os.Open(filePath)
+	if err != nil {
+		return floorContent
+	}
 
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-        line := scanner.Text()
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
 		if len(line) == 0 {
 			continue
 		}
 		var tab []int = make([]int, 0, len(line))
-		for i:=0; i<len(line); i++ {
+		for i := 0; i < len(line); i++ {
 			num, err := strconv.Atoi(string(line[i]))
 			if err != nil {
 				break
 			}
 			tab = append(tab, num)
 		}
-        floorContent = append(floorContent,tab)
-    }
+		floorContent = append(floorContent, tab)
+	}
 	return floorContent
 }
