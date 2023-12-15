@@ -35,13 +35,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 	}
 	defer file.Close()
 
-	file, err := os.Open(filePath)
-	if err != nil {
-		return floorContent
-	}
-
-	defer file.Close()
-
 	// Scanner pour trouver la longueur maximale d'une ligne dans le fichier
 	max := bufio.NewScanner(file)
 	maxLength := 0
