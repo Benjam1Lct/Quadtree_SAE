@@ -1,11 +1,12 @@
 package floor
 
 import (
-	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
-	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 	"bufio"
 	"os"
 	"strconv"
+
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 )
 
 // Init initialise les structures de données internes de f.
@@ -23,33 +24,51 @@ func (f *Floor) Init() {
 	}
 }
 
-// lecture du contenu d'un fichier représentant un terrain
-// pour le stocker dans un tableau
+// readFloorFromFile lit le contenu d'un fichier représentant un terrain
+// et le stocke dans un tableau 2D. Les lignes plus courtes sont remplies avec -1
+// pour obtenir un tableau rectangulaire.
 func readFloorFromFile(fileName string) (floorContent [][]int) {
 	filePath := fileName
+	file, err := os.Open(filePath)
+	if err != nil {
+		return floorContent
+	}
+	defer file.Close()
 
-    file, err := os.Open(filePath)
-    if err != nil {
-        return floorContent
-    }
-	
-    defer file.Close() 
+	// Scanner pour trouver la longueur maximale d'une ligne dans le fichier
+	max := bufio.NewScanner(file)
+	maxLength := 0
 
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-        line := scanner.Text()
+	// Trouver la longueur maximale
+	for max.Scan() {
+		line := max.Text()
+		if len(line) > maxLength {
+			maxLength = len(line)
+		}
+	}
+	file.Seek(0, 0) // Réinitialiser la position du curseur du fichier au début
+
+	// Scanner pour lire le fichier et construire le tableau
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
 		if len(line) == 0 {
 			continue
 		}
-		var tab []int = make([]int, 0, len(line))
-		for i:=0; i<len(line); i++ {
-			num, err := strconv.Atoi(string(line[i]))
-			if err != nil {
-				break
+		var tab []int = make([]int, 0, maxLength)
+		for i := 0; i < maxLength; i++ {
+			if i < len(line) {
+				num, err := strconv.Atoi(string(line[i]))
+				if err != nil {
+					break
+				}
+				tab = append(tab, num)
+			} else {
+				// Dans le cas où la ligne est plus courte que la longueur maximale
+				tab = append(tab, -1)
 			}
-			tab = append(tab, num)
 		}
-        floorContent = append(floorContent,tab)
-    }
+		floorContent = append(floorContent, tab)
+	}
 	return floorContent
 }

@@ -6,12 +6,25 @@ import "gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 // un terrain dont la case le plus en haut à gauche a pour coordonnées
 // (topLeftX, topLeftY)) à partir du qadtree q.
 func (q Quadtree) GetContent(topLeftX, topLeftY int, contentHolder [][]int) {
+	/*
+		Entrées :
+		q : un quadtree
+		topLeftX : coordonnée X du coin en haut à gauche
+		topLeftY : coordonnée Y du coin en haut à gauche
+		contentHolder : tableau qui sera utilisé pour afficher le sol
+
+		Fonction qui récupère un quadtree et qui remplit contentHolder à partir de ce quadtree
+	*/
+
+	/*Parcours les coordonnées par rapport à la taille maximum de l'affichage
+	Et on regarde si chaque case appartient au tableau
+	Si c'est le cas alors on va chercher le content de cette case dans l'arbre*/
 	for i := 0; i < configuration.Global.NumTileX; i++ {
 		for j := 0; j < configuration.Global.NumTileY; j++ {
-			absX := topLeftX + i
-			absY := topLeftY + j
-			if absX < q.width && absY < q.height && absX >= 0 && absY >= 0 {
-				contentHolder[j][i] = ReturnFloor(absX, absY, q.root)
+			X := topLeftX + i
+			Y := topLeftY + j
+			if X < q.width && Y < q.height && X >= 0 && Y >= 0 { /*On s'assure que la case est dans le tableau*/
+				contentHolder[j][i] = SearchContent(X, Y, q.root)
 			} else {
 				contentHolder[j][i] = -1
 			}
@@ -19,29 +32,37 @@ func (q Quadtree) GetContent(topLeftX, topLeftY int, contentHolder [][]int) {
 	}
 }
 
-func ReturnFloor(absX, absY int, n *node) int {
-	//case feuille
+func SearchContent(X, Y int, n *node) int {
+	/*
+		Entrées :
+		X et Y : des coordonnées
+		n : un noeud du quadtree
+
+		Sortie :
+		un entier qui représente le content
+
+		Fonction qui parcours un quadtree de manière récursive pour trouver le content de la case du tableau
+	*/
 	if n.topLeftNode == nil {
 		return n.content
 	}
 
-	//determination coos carré suivant
 	halfWidth := n.width / 2
 	halfHeight := n.height / 2
 	centerX := n.topLeftX + halfWidth
 	centerY := n.topLeftY + halfHeight
 
-	if absX < centerX {
-		if absY < centerY {
-			return ReturnFloor(absX, absY, n.topLeftNode)
+	if X < centerX { /*On compare le centre aux coordonnées pour savoir dans quel noeud on veut aller*/
+		if Y < centerY {
+			return SearchContent(X, Y, n.topLeftNode)
 		} else {
-			return ReturnFloor(absX, absY, n.bottomLeftNode)
+			return SearchContent(X, Y, n.bottomLeftNode)
 		}
 	} else {
-		if absY < centerY {
-			return ReturnFloor(absX, absY, n.topRightNode)
+		if Y < centerY {
+			return SearchContent(X, Y, n.topRightNode)
 		} else {
-			return ReturnFloor(absX, absY, n.bottomRightNode)
+			return SearchContent(X, Y, n.bottomRightNode)
 		}
 	}
 }
