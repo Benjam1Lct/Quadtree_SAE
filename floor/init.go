@@ -9,7 +9,7 @@ import (
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 )
 
-// Init initialise les structures de données internes de f.
+// Init initialise les structures de données internes de f
 func (f *Floor) Init() {
 	f.content = make([][]int, configuration.Global.NumTileY)
 	for y := 0; y < len(f.content); y++ {
