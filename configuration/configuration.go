@@ -47,6 +47,7 @@ type Configuration struct {
 	RandomFloor                   bool
 	WidthRandomFloor              int
 	HeightRandomFloor             int
+	WaterBlocked                  bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`

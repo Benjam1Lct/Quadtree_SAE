@@ -11,7 +11,7 @@ func create_random_floor(width, height int) [][]int {
 	for i := range terrain {
 		terrain[i] = make([]int, width)
 		for j := range terrain[i] {
-			terrain[i][j] = rand.Intn(4) + 1
+			terrain[i][j] = rand.Intn(5)
 		}
 	}
 	return terrain
