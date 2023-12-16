@@ -12,13 +12,17 @@ import (
 // On aurait pu se passer de cette fonction et tout faire dans Draw.
 // Mais cela permet de découpler le calcul de l'affichage.
 func (f *Floor) Update(camXPos, camYPos int) {
-	switch configuration.Global.FloorKind {
-	case gridFloor:
-		f.updateGridFloor(camXPos, camYPos)
-	case fromFileFloor:
-		f.updateFromFileFloor(camXPos, camYPos)
-	case quadTreeFloor:
+	if configuration.Global.RandomFloor {
 		f.updateQuadtreeFloor(camXPos, camYPos)
+	} else {
+		switch configuration.Global.FloorKind {
+		case gridFloor:
+			f.updateGridFloor(camXPos, camYPos)
+		case fromFileFloor:
+			f.updateFromFileFloor(camXPos, camYPos)
+		case quadTreeFloor:
+			f.updateQuadtreeFloor(camXPos, camYPos)
+		}
 	}
 }
 

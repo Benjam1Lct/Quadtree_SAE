@@ -15,12 +15,17 @@ func (f *Floor) Init() {
 	for y := 0; y < len(f.content); y++ {
 		f.content[y] = make([]int, configuration.Global.NumTileX)
 	}
-
-	switch configuration.Global.FloorKind {
-	case fromFileFloor:
-		f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
-	case quadTreeFloor:
-		f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
+	if configuration.Global.RandomFloor {
+		random_floor := create_random_floor(configuration.Global.WidthRandomFloor, configuration.Global.HeightRandomFloor)
+		writeTerrainToFile(random_floor, "../floor-files/random_floor")
+		f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile("../floor-files/random_floor"))
+	} else {
+		switch configuration.Global.FloorKind {
+		case fromFileFloor:
+			f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
+		case quadTreeFloor:
+			f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
+		}
 	}
 }
 
