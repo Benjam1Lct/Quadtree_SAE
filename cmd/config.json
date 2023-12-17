@@ -6,10 +6,10 @@
     "NumCharacterAnimImages": 4,
     "NumFramePerCharacterAnimImage": 4,
     "NumTileForDebug": 6,
-    "CameraMode": 0,
+    "CameraMode": 1,
     "FloorKind": 2,
-    "FloorFile": "../floor-files/exemple",
-    "RandomFloor": true,
+    "FloorFile": "../floor-files/validation_WaterBlocked",
+    "RandomFloor": false,
     "WidthRandomFloor": 10,
     "HeightRandomFloor":10,
     "WaterBlocked":true

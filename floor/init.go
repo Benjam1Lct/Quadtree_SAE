@@ -2,6 +2,7 @@ package floor
 
 import (
 	"bufio"
+	"math/rand"
 	"os"
 	"strconv"
 
@@ -18,13 +19,36 @@ func (f *Floor) Init() {
 	if configuration.Global.RandomFloor {
 		random_floor := create_random_floor(configuration.Global.WidthRandomFloor, configuration.Global.HeightRandomFloor)
 		writeTerrainToFile(random_floor, "../floor-files/random_floor")
-		f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile("../floor-files/random_floor"))
+		terrain := readFloorFromFile("../floor-files/random_floor")
+		if configuration.Global.WaterBlocked {
+			if configuration.Global.CameraMode == 0 && terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
+				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
+			} else if configuration.Global.CameraMode == 1 && terrain[0][0] == 4 {
+				terrain[0][0] = rand.Intn(4)
+			}
+		}
+		f.quadtreeContent = quadtree.MakeFromArray(terrain)
 	} else {
 		switch configuration.Global.FloorKind {
 		case fromFileFloor:
 			f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
+			if configuration.Global.WaterBlocked {
+				if configuration.Global.CameraMode == 0 && f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
+					f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
+				} else if configuration.Global.CameraMode == 1 && f.fullContent[0][0] == 4 {
+					f.fullContent[0][0] = rand.Intn(4)
+				}
+			}
 		case quadTreeFloor:
-			f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
+			terrain_quadtree := readFloorFromFile(configuration.Global.FloorFile)
+			if configuration.Global.WaterBlocked {
+				if configuration.Global.CameraMode == 0 && terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
+					terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
+				} else if configuration.Global.CameraMode == 1 && terrain_quadtree[0][0] == 4 {
+					terrain_quadtree[0][0] = rand.Intn(4)
+				}
+			}
+			f.quadtreeContent = quadtree.MakeFromArray(terrain_quadtree)
 		}
 	}
 }
