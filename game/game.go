@@ -18,3 +18,8 @@ type Game struct {
 	floor     floor.Floor
 	character character.Character
 }
+
+type State struct {
+	enterX, enterY int
+	endX, endY     int
+}

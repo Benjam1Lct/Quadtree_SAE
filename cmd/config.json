@@ -12,5 +12,6 @@
     "RandomFloor": false,
     "WidthRandomFloor": 10,
     "HeightRandomFloor":10,
-    "WaterBlocked":true
+    "WaterBlocked":false,
+    "Teleporteur":true
 }
