@@ -47,17 +47,14 @@ func (f *Floor) updateGridFloor(camXPos, camYPos int) {
 // Il prend en compte la position de la caméra (camXPos, camYPos) pour extraire la partie pertinente du tableau.
 // Les cases en dehors des limites du tableau d'origine sont remplies avec -1.
 func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
-	// Calcul des indices de la zone d'intérêt dans le tableau d'origine
 	inter_x := []int{camXPos - configuration.Global.NumTileX/2, (camXPos + configuration.Global.NumTileX/2) + configuration.Global.NumTileX%2}
 	inter_y := []int{camYPos - configuration.Global.NumTileY/2, (camYPos + configuration.Global.NumTileY/2) + configuration.Global.NumTileY%2}
 
-	// Réinitialiser le contenu actuel
 	f.content = make([][]int, (configuration.Global.NumTileY))
 
 	for i := inter_y[0]; i < inter_y[1]; i++ {
 		if i < 0 || i >= len(f.fullContent) {
 			for x := 0; x < configuration.Global.NumTileX; x++ {
-				// Ajouter des cases vides pour les lignes en dehors des limites de f.fullContent
 				f.content[i-inter_y[0]] = append(f.content[i-inter_y[0]], -1)
 			}
 			continue
@@ -65,7 +62,6 @@ func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
 
 		for j := inter_x[0]; j < inter_x[1]; j++ {
 			if j < 0 || j >= len(f.fullContent[i]) {
-				// Ajouter des cases vides pour les colonnes en dehors des limites de f.fullContent
 				f.content[i-inter_y[0]] = append(f.content[i-inter_y[0]], -1)
 			} else {
 				f.content[i-inter_y[0]] = append(f.content[i-inter_y[0]], f.fullContent[i][j])

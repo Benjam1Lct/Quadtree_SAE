@@ -15,4 +15,6 @@ func (c *Character) Init() {
 		c.X = configuration.Global.ScreenCenterTileX
 		c.Y = configuration.Global.ScreenCenterTileY
 	}
+
+	c.tp = Init_Teleport()
 }

@@ -1,9 +1,8 @@
 package character
 
 import (
-	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
-
 	"github.com/hajimehoshi/ebiten/v2"
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 )
 
 // Update met à jour la position du personnage, son orientation
@@ -54,5 +53,21 @@ func (c *Character) Update(blocking [4]bool) {
 			}
 		}
 	}
-
+	if configuration.Global.Teleport {
+		if ebiten.IsKeyPressed(ebiten.KeyT) && c.tp.Tpress {
+			c.tp.create_teleport(c.X, c.Y)
+			c.tp.Tpress = false
+		}
+		if (c.X == c.tp.enterX && c.Y == c.tp.enterY) && !c.tp.onPortal && c.tp.endX != -1 {
+			c.X, c.Y = c.tp.endX, c.tp.endY
+			c.tp.onPortal = true
+		} else if (c.X == c.tp.endX && c.Y == c.tp.endY) && !c.tp.onPortal {
+			c.X, c.Y = c.tp.enterX, c.tp.enterY
+			c.tp.onPortal = true
+		}
+		if (c.X != c.tp.enterX || c.Y != c.tp.enterY) && (c.X != c.tp.endX || c.Y != c.tp.endY) && c.tp.onPortal {
+			c.tp.onPortal = false
+			c.tp.Tpress = true
+		}
+	}
 }
