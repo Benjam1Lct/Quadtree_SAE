@@ -11,7 +11,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-//go:embed floor.png
+//go:embed EnhanceFloor16.png
 var floorBytes []byte
 
 // FloorImage contient une version compatible avec Ebitengine de l'image

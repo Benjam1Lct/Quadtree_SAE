@@ -44,4 +44,5 @@ Un quadtree est une structure de données arborescente où chaque nœud (non feu
 
 Un quadtree divise le terrain en quatre zones, chaque zone étant représentée par un nœud de l'arbre. Chaque nœud non feuille a quatre enfants, représentant les quatre sous-zones de la zone parente. Les zones qui contiennent un seul type de terrain sont représentées par des feuilles qui stockent l'information sur la taille de la zone et le type de terrain.
 
+## Paramêtres du config.json
 

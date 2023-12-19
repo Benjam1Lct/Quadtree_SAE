@@ -49,6 +49,7 @@ type Configuration struct {
 	HeightRandomFloor             int
 	WaterBlocked                  bool
 	Teleporteur                   bool
+	EnhanceFloor                  bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`
