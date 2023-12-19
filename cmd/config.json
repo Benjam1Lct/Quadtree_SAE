@@ -6,13 +6,13 @@
     "NumCharacterAnimImages": 4,
     "NumFramePerCharacterAnimImage": 4,
     "NumTileForDebug": 6,
-    "CameraMode": 0,
+    "CameraMode": 1,
     "FloorKind": 2,
-    "FloorFile": "../floor-files/test-newdesign",
+    "FloorFile": "../floor-files/validation",
     "RandomFloor": false,
     "WidthRandomFloor": 10,
     "HeightRandomFloor":10,
     "WaterBlocked":false,
-    "Teleport":true,
-    "EnhanceFloor": true
+    "Teleport":false,
+    "EnhanceFloor": false
 }
