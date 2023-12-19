@@ -75,138 +75,17 @@ func updateFloor(floorContent, newFloorContent [][]int) {
 	for i := 0; i < len(floorContent); i++ {
 		for j := 0; j < len(floorContent[i]); j++ {
 			if i == 0 && j == 0 {
-				if floorContent[i][j+1] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
-					if floorContent[i+1][j+1] == floorContent[i][j] {
-						newFloorContent[i][j] = 198
-					} else {
-						newFloorContent[i][j] = 4
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 {
-					newFloorContent[i][j] = 100
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 {
-					newFloorContent[i][j] = 7
-				}
-			} else if i == len(floorContent)-1 && j == len(floorContent[i])-1 {
-				if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 {
-					if floorContent[i-1][j-1] == 41 {
-						newFloorContent[i][j] = 231
-					} else {
-						newFloorContent[i][j] = 70
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 {
-					newFloorContent[i][j] = 102
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 {
-					newFloorContent[i][j] = 71
-				}
-			} else if i == 0 {
-				if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i][j+1] == 41 && floorContent[i+1][j] == 41 {
-					if floorContent[i+1][j-1] == 41 && floorContent[i+1][j+1] == 41 {
-						newFloorContent[i][j] = 197
-					} else {
-						newFloorContent[i][j] = 5
-					}
 
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i+1][j] == 41 {
-					if floorContent[i+1][j-1] == 41 {
-						newFloorContent[i][j] = 199
-					} else {
-						newFloorContent[i][j] = 6
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i+1][j] == 41 {
-					if floorContent[i+1][j+1] == 41 {
-						newFloorContent[i][j] = 198
-					} else {
-						newFloorContent[i][j] = 4
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i][j+1] == 41 {
-					newFloorContent[i][j] = 101
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 {
-					newFloorContent[i][j] = 102
-				} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 {
-					newFloorContent[i][j] = 100
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 {
-					newFloorContent[i][j] = 7
-				}
+			} else if i == len(floorContent)-1 && j == len(floorContent[i])-1 {
+
+			} else if i == 0 {
+
 			} else if j == 0 {
-				if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 {
-					if floorContent[i+1][j+1] == 41 && floorContent[i-1][j+1] == 41 {
-						newFloorContent[i][j] = 196
-					} else {
-						newFloorContent[i][j] = 36
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 {
-					if floorContent[i+1][j+1] == 41 {
-						newFloorContent[i][j] = 198
-					} else {
-						newFloorContent[i][j] = 4
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 && floorContent[i][j+1] == 41 {
-					if floorContent[i-1][j+1] == 41 {
-						newFloorContent[i][j] = 230
-					} else {
-						newFloorContent[i][j] = 68
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 {
-					newFloorContent[i][j] = 39
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 {
-					newFloorContent[i][j] = 39
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 {
-					newFloorContent[i][j] = 39
-				}
+
 			} else if i == len(floorContent)-1 {
-				if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i][j+1] == 41 && floorContent[i-1][j] == 41 {
-					if floorContent[i-1][j+1] == 41 && floorContent[i-1][j-1] == 41 {
-						newFloorContent[i][j] = 228
-					} else {
-						newFloorContent[i][j] = 69
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 {
-					if floorContent[i+1][j-1] == 41 {
-						newFloorContent[i][j] = 199
-					} else {
-						newFloorContent[i][j] = 6
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i-1][j] == 41 {
-					if floorContent[i+1][j+1] == 41 {
-						newFloorContent[i][j] = 198
-					} else {
-						newFloorContent[i][j] = 4
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 {
-					newFloorContent[i][j] = 101
-				} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 {
-					newFloorContent[i][j] = 101
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 {
-					newFloorContent[i][j] = 39
-				}
+
 			} else if j == len(floorContent[i])-1 {
-				if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j-1] == 41 {
-					if floorContent[i+1][j-1] == 41 && floorContent[i-1][j-1] == 41 {
-						newFloorContent[i][j] = 229
-					} else {
-						newFloorContent[i][j] = 38
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j-1] == 41 {
-					if floorContent[i+1][j-1] == 41 {
-						newFloorContent[i][j] = 199
-					} else {
-						newFloorContent[i][j] = 6
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 && floorContent[i][j-1] == 41 {
-					if floorContent[i-1][j-1] == 41 {
-						newFloorContent[i][j] = 231
-					} else {
-						newFloorContent[i][j] = 70
-					}
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i-1][j] == 41 {
-					newFloorContent[i][j] = 39
-				} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 {
-					newFloorContent[i][j] = 102
-				} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 {
-					newFloorContent[i][j] = 71
-				} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 {
-					newFloorContent[i][j] = 7
-				}
+
 			} else {
 				adjustTile(floorContent, newFloorContent, i, j)
 			}
@@ -235,14 +114,12 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 		if len(parts) > maxLength {
 			maxLength = len(parts)
 		}
-		fmt.Println(line)
 		for _, chara := range line {
 			if chara == ',' {
 				newFormat = true
 			}
 		}
 	}
-	fmt.Println(newFormat)
 	file.Seek(0, 0)
 
 	scanner := bufio.NewScanner(file)
@@ -318,11 +195,9 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 					tab = append(tab, -1)
 				}
 			}
-			fmt.Println(tab)
 			floorContent = append(floorContent, tab)
 		}
 	}
-	fmt.Println(floorContent)
 
 	// Créer un nouveau tableau avec la même structure
 	newFloorContent := make([][]int, len(floorContent))
