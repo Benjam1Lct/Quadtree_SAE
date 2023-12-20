@@ -1,6 +1,8 @@
 package camera
 
-import "gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+import (
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+)
 
 // Update met à jour la position de la caméra à chaque pas
 // de temps, c'est-à-dire tous les 1/60 secondes.
@@ -11,6 +13,8 @@ func (c *Camera) Update(characterPosX, characterPosY int) {
 		c.updateStatic()
 	case FollowCharacter:
 		c.updateFollowCharacter(characterPosX, characterPosY)
+	case NoVoid:
+		c.updateNoVoid(characterPosX, characterPosY)
 	}
 }
 
@@ -26,4 +30,20 @@ func (c *Camera) updateStatic() {}
 func (c *Camera) updateFollowCharacter(characterPosX, characterPosY int) {
 	c.X = characterPosX
 	c.Y = characterPosY
+}
+
+func (c *Camera) updateNoVoid(characterPosX, characterPosY int) {
+	halfNumTileX := configuration.Global.NumTileX / 2
+	halfNumTileY := configuration.Global.NumTileY / 2
+	c.X = clamp(characterPosX, halfNumTileX, c.MapSizeX-halfNumTileX)
+	c.Y = clamp(characterPosY, halfNumTileY, c.MapSizeY-halfNumTileY)
+}
+
+func clamp(value, min, max int) int {
+	if value < min {
+		return min
+	} else if value > max {
+		return max
+	}
+	return value
 }
