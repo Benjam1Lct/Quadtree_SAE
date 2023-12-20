@@ -17,4 +17,6 @@ func (c *Character) Init() {
 	}
 
 	c.tp = Init_Teleport()
+
+	configuration.Global.LstTeleport = [][]int{{-1, -1}, {-1, -1}}
 }
