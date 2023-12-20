@@ -50,6 +50,15 @@ Téléporteurs
 Interdiction de marcher sur l’eau
 Caméra bloquée aux bords du terrain
 
+modification du sprite: changement de personnage et ajout d'animation et de gameplay
+
+## Ajoute d'un menu demmarage et configuration
+choix des parametres de config.json depuis une interface graphique
+choix des maps corespondant au fichier txt disponible avec une preview des maps
+ajout music dans le jeu et bruitage
+choix langue du jeu
+editeur de map
+
 
 
 
