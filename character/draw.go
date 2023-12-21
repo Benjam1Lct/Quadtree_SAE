@@ -75,7 +75,3 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		}
 	}
 }
-
-func (c Character) DrawTeleporteur(screen *ebiten.Image, camX, camY int) {
-
-}
