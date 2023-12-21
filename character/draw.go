@@ -47,4 +47,35 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		image.Rect(shiftX, shiftY, shiftX+configuration.Global.TileSize, shiftY+configuration.Global.TileSize),
 	).(*ebiten.Image), op)
 
+	if configuration.Global.Teleport && c.tp.enterX != -1 {
+		xTileForDisplay := c.tp.enterX - camX + configuration.Global.ScreenCenterTileX
+		yTileForDisplay := c.tp.enterY - camY + configuration.Global.ScreenCenterTileY
+		xPos := (xTileForDisplay)*configuration.Global.TileSize + configuration.Global.TileSize/2
+		yPos := (yTileForDisplay)*configuration.Global.TileSize - configuration.Global.TileSize/2 + 2
+
+		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Translate(float64(xPos), float64(yPos))
+
+		screen.DrawImage(assets.FloorImage.SubImage(
+			image.Rect(0*configuration.Global.TileSize, 31*configuration.Global.TileSize, 1*configuration.Global.TileSize, 32*configuration.Global.TileSize),
+		).(*ebiten.Image), op)
+
+		if c.tp.endX != -1 {
+			xTileForDisplay = c.tp.endX - camX + configuration.Global.ScreenCenterTileX
+			yTileForDisplay = c.tp.endY - camY + configuration.Global.ScreenCenterTileY
+			xPos = (xTileForDisplay)*configuration.Global.TileSize + configuration.Global.TileSize/2
+			yPos = (yTileForDisplay)*configuration.Global.TileSize - configuration.Global.TileSize/2 + 2
+
+			op = &ebiten.DrawImageOptions{}
+			op.GeoM.Translate(float64(xPos), float64(yPos))
+
+			screen.DrawImage(assets.FloorImage.SubImage(
+				image.Rect(0*configuration.Global.TileSize, 30*configuration.Global.TileSize, 1*configuration.Global.TileSize, 31*configuration.Global.TileSize),
+			).(*ebiten.Image), op)
+		}
+	}
+}
+
+func (c Character) DrawTeleporteur(screen *ebiten.Image, camX, camY int) {
+
 }
