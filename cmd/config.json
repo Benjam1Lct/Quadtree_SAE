@@ -12,7 +12,7 @@
     "RandomFloor": true,
     "WidthRandomFloor": 20,
     "HeightRandomFloor":20,
-    "WaterBlocked":false,
+    "WaterBlocked":true,
     "Teleport":true,
     "EnhanceFloor": false
 }

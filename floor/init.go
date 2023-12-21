@@ -3,7 +3,6 @@ package floor
 import (
 	"bufio"
 	"fmt"
-	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -23,10 +22,10 @@ func (f *Floor) Init() {
 		writeTerrainToFile(random_floor, "../floor-files/random_floor")
 		terrain := readFloorFromFile("../floor-files/random_floor")
 		if configuration.Global.WaterBlocked {
-			if configuration.Global.CameraMode == 0 && terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
-				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
-			} else if configuration.Global.CameraMode == 1 && terrain[0][0] == 4 {
-				terrain[0][0] = rand.Intn(4)
+			if configuration.Global.CameraMode == 0 && terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
+			} else if configuration.Global.CameraMode == 1 && (terrain[0][0] == 406 || terrain[0][0] == 4) {
+				terrain[0][0] = 33
 			}
 		}
 		f.quadtreeContent = quadtree.MakeFromArray(terrain)
@@ -35,19 +34,19 @@ func (f *Floor) Init() {
 		case fromFileFloor:
 			f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
 			if configuration.Global.WaterBlocked {
-				if configuration.Global.CameraMode == 0 && f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
-					f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
-				} else if configuration.Global.CameraMode == 1 && f.fullContent[0][0] == 4 {
-					f.fullContent[0][0] = rand.Intn(4)
+				if configuration.Global.CameraMode == 0 && f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+					f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
+				} else if configuration.Global.CameraMode == 1 && (f.fullContent[0][0] == 406 || f.fullContent[0][0] == 4) {
+					f.fullContent[0][0] = 33
 				}
 			}
 		case quadTreeFloor:
 			terrain_quadtree := readFloorFromFile(configuration.Global.FloorFile)
 			if configuration.Global.WaterBlocked {
-				if configuration.Global.CameraMode == 0 && terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 4 {
-					terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = rand.Intn(4)
-				} else if configuration.Global.CameraMode == 1 && terrain_quadtree[0][0] == 4 {
-					terrain_quadtree[0][0] = rand.Intn(4)
+				if configuration.Global.CameraMode == 0 && terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+					terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
+				} else if configuration.Global.CameraMode == 1 && (terrain_quadtree[0][0] == 406 || terrain_quadtree[0][0] == 4) {
+					terrain_quadtree[0][0] = 33
 				}
 			}
 			f.quadtreeContent = quadtree.MakeFromArray(terrain_quadtree)
@@ -56,19 +55,7 @@ func (f *Floor) Init() {
 }
 
 func adjustTile(floorContent, newFloorContent [][]int, i, j int) {
-	if floorContent[i][j] == 41 {
-		if i > 0 && j > 0 && i < len(floorContent)-1 && j < len(floorContent[i])-1 {
-			if floorContent[i][j-1] != 41 && floorContent[i-1][j] != 41 && floorContent[i+1][j] != 41 && floorContent[i][j+1] != 41 {
-				newFloorContent[i][j] = 103
-			} else if floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i+1][j+1] == 41 && floorContent[i+1][j-1] == 41 && floorContent[i-1][j-1] == 41 && floorContent[i-1][j+1] == 41 {
-				newFloorContent[i][j] = 41
-			} else if floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 {
-				newFloorContent[i][j] = 37
-			} else {
 
-			}
-		}
-	}
 }
 
 func updateFloor(floorContent, newFloorContent [][]int) {
