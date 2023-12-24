@@ -24,7 +24,7 @@ func (f *Floor) Init() {
 		if configuration.Global.WaterBlocked {
 			if configuration.Global.CameraMode == 0 && terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
 				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-			} else if configuration.Global.CameraMode == 1 && (terrain[0][0] == 406 || terrain[0][0] == 4) {
+			} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (terrain[0][0] == 406 || terrain[0][0] == 4) {
 				terrain[0][0] = 33
 			}
 		}
@@ -36,7 +36,7 @@ func (f *Floor) Init() {
 			if configuration.Global.WaterBlocked {
 				if configuration.Global.CameraMode == 0 && f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
 					f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-				} else if configuration.Global.CameraMode == 1 && (f.fullContent[0][0] == 406 || f.fullContent[0][0] == 4) {
+				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (f.fullContent[0][0] == 406 || f.fullContent[0][0] == 4) {
 					f.fullContent[0][0] = 33
 				}
 			}
@@ -45,7 +45,7 @@ func (f *Floor) Init() {
 			if configuration.Global.WaterBlocked {
 				if configuration.Global.CameraMode == 0 && terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
 					terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-				} else if configuration.Global.CameraMode == 1 && (terrain_quadtree[0][0] == 406 || terrain_quadtree[0][0] == 4) {
+				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (terrain_quadtree[0][0] == 406 || terrain_quadtree[0][0] == 4) {
 					terrain_quadtree[0][0] = 33
 				}
 			}

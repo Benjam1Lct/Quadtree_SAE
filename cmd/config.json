@@ -6,7 +6,7 @@
     "NumCharacterAnimImages": 4,
     "NumFramePerCharacterAnimImage": 4,
     "NumTileForDebug": 6,
-    "CameraMode": 1,
+    "CameraMode": 2,
     "FloorKind": 2,
     "FloorFile": "../floor-files/beaupasbeau",
     "RandomFloor": true,
@@ -14,5 +14,6 @@
     "HeightRandomFloor":20,
     "WaterBlocked":true,
     "Teleport":true,
-    "EnhanceFloor": false
+    "EnhanceFloor":false,
+    "StartingMenu":false
 }
