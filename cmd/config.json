@@ -15,5 +15,5 @@
     "WaterBlocked":true,
     "Teleport":true,
     "EnhanceFloor":false,
-    "StartingMenu":false
+    "StartingMenu":true
 }
