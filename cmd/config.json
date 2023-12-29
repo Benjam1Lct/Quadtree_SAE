@@ -8,12 +8,12 @@
     "NumTileForDebug": 6,
     "CameraMode": 2,
     "FloorKind": 2,
-    "FloorFile": "../floor-files/beaupasbeau",
-    "RandomFloor": true,
+    "FloorFile": "../floor-files/test-newdesign",
+    "RandomFloor": false,
     "WidthRandomFloor": 20,
     "HeightRandomFloor":20,
     "WaterBlocked":true,
     "Teleport":true,
-    "EnhanceFloor":false,
+    "EnhanceFloor":true,
     "StartingMenu":false
 }
