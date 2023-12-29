@@ -105,15 +105,28 @@ func StartPage(res *uiResources) *page {
 
 			fmt.Println("La valeur de 'Restart' a été modifiée avec succès.")
 
-			// Relancer le programme
-			cmd := exec.Command("go", "run", "main.go")
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-			err = cmd.Run()
-			if err != nil {
-				fmt.Println("Erreur lors du lancement du programme :", err)
-				return
+			// Déclarer la variable cmd à l'extérieur de la goroutine
+			var cmd *exec.Cmd
+
+			// Lancer la nouvelle instance dans une goroutine
+			go func() {
+				cmd := exec.Command("./cmd")
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+				err := cmd.Run()
+				if err != nil {
+					fmt.Println("Erreur lors du lancement du programme :", err)
+				}
+			}()
+
+			// Attendre que la nouvelle instance se termine
+			if err := cmd.Wait(); err != nil {
+				fmt.Println("Erreur lors de l'attente de la fin du programme :", err)
 			}
+
+			// Terminer le programme actuel
+			os.Exit(0)
+
 		}),
 	)
 	c.AddChild(b)
