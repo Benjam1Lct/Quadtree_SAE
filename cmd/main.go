@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
@@ -23,8 +22,6 @@ func main() {
 
 	configuration.Load(configFileName)
 	assets.Load()
-
-	fmt.Println("La valeur de 'Restart' a été modifiée avec succès.")
 
 	runGame()
 }

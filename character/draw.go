@@ -14,6 +14,7 @@ import (
 // fonction des charactéristiques du personnage (position, orientation,
 // étape d'animation, etc) et de la position de la caméra (le personnage
 // est affiché relativement à la caméra).
+
 func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 
 	xShift := 0
@@ -57,7 +58,7 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		op.GeoM.Translate(float64(xPos), float64(yPos))
 
 		screen.DrawImage(assets.FloorImage.SubImage(
-			image.Rect(0*configuration.Global.TileSize, 31*configuration.Global.TileSize, 1*configuration.Global.TileSize, 32*configuration.Global.TileSize),
+			image.Rect((c.animationFlag-1)*configuration.Global.TileSize, 31*configuration.Global.TileSize, c.animationFlag*configuration.Global.TileSize, 32*configuration.Global.TileSize),
 		).(*ebiten.Image), op)
 
 		if c.tp.endX != -1 {
@@ -70,7 +71,7 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 			op.GeoM.Translate(float64(xPos), float64(yPos))
 
 			screen.DrawImage(assets.FloorImage.SubImage(
-				image.Rect(0*configuration.Global.TileSize, 30*configuration.Global.TileSize, 1*configuration.Global.TileSize, 31*configuration.Global.TileSize),
+				image.Rect((c.animationFlag-1)*configuration.Global.TileSize, 30*configuration.Global.TileSize, c.animationFlag*configuration.Global.TileSize, 31*configuration.Global.TileSize),
 			).(*ebiten.Image), op)
 		}
 	}

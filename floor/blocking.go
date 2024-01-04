@@ -14,17 +14,40 @@ func (f Floor) Blocking(characterXPos, characterYPos, camXPos, camYPos int) (blo
 	relativeYPos := characterYPos - camYPos + configuration.Global.ScreenCenterTileY
 
 	if configuration.Global.WaterBlocked {
-		blocking[0] = relativeYPos <= 0 || f.content[relativeYPos-1][relativeXPos] == -1 || f.content[relativeYPos-1][relativeXPos] == 406
-		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.content[relativeYPos][relativeXPos+1] == -1 || f.content[relativeYPos][relativeXPos+1] == 406
-		blocking[2] = relativeYPos >= configuration.Global.NumTileY-1 || f.content[relativeYPos+1][relativeXPos] == -1 || f.content[relativeYPos+1][relativeXPos] == 406
-		blocking[3] = relativeXPos <= 0 || f.content[relativeYPos][relativeXPos-1] == -1 || f.content[relativeYPos][relativeXPos-1] == 406
+		blocking[0] = relativeYPos <= 0 || f.content[relativeYPos-1][relativeXPos] == -1 || calcFloor(f.content[relativeYPos-1][relativeXPos])
+		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.content[relativeYPos][relativeXPos+1] == -1 || calcFloor(f.content[relativeYPos][relativeXPos+1])
+		blocking[2] = relativeYPos >= configuration.Global.NumTileY-1 || f.content[relativeYPos+1][relativeXPos] == -1 || calcFloor(f.content[relativeYPos+1][relativeXPos])
+		blocking[3] = relativeXPos <= 0 || f.content[relativeYPos][relativeXPos-1] == -1 || calcFloor(f.content[relativeYPos][relativeXPos-1])
 	} else {
 		blocking[0] = relativeYPos <= 0 || f.content[relativeYPos-1][relativeXPos] == -1
 		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.content[relativeYPos][relativeXPos+1] == -1
 		blocking[2] = relativeYPos >= configuration.Global.NumTileY-1 || f.content[relativeYPos+1][relativeXPos] == -1
 		blocking[3] = relativeXPos <= 0 || f.content[relativeYPos][relativeXPos-1] == -1
 	}
-
-	//fmt.Println("from blocking", blocking)
 	return blocking
+}
+
+func calcFloor(content int) (result bool) {
+	// Liste des numéros de cases d'eau
+	listeCasesEau := []int{406, 20, 21, 22, 23, 52, 53, 54, 55, 84, 85, 86, 87, 116, 117, 118, 119, 148, 149, 150, 151, 180, 181, 182, 183, 212, 213, 214, 215, 244, 245, 246, 247, 276, 277, 278, 279, 308, 309, 310, 311, 340, 341, 342, 343, 372, 373, 374, 375}
+
+	// Numéro de la case actuelle
+	numeroCaseActuelle := content
+
+	// Vérifier si la case actuelle est une case d'eau
+	var estCaseDEau bool
+	for _, numero := range listeCasesEau {
+		if numero == numeroCaseActuelle {
+			estCaseDEau = true
+			break
+		}
+	}
+
+	// Bloquer le déplacement si c'est une case d'eau
+	if estCaseDEau {
+		return true
+	} else {
+		return false
+	}
+
 }

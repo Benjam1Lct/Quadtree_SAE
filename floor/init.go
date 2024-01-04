@@ -2,7 +2,6 @@ package floor
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -22,9 +21,9 @@ func (f *Floor) Init() {
 		writeTerrainToFile(random_floor, "../floor-files/random_floor")
 		terrain := readFloorFromFile("../floor-files/random_floor")
 		if configuration.Global.WaterBlocked {
-			if configuration.Global.CameraMode == 0 && terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+			if configuration.Global.CameraMode == 0 && calcFloor(terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY]) {
 				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-			} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (terrain[0][0] == 406) {
+			} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && calcFloor(terrain[0][0]) {
 				terrain[0][0] = 33
 			}
 		}
@@ -34,18 +33,18 @@ func (f *Floor) Init() {
 		case fromFileFloor:
 			f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
 			if configuration.Global.WaterBlocked {
-				if configuration.Global.CameraMode == 0 && f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+				if configuration.Global.CameraMode == 0 && calcFloor(f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY]) {
 					f.fullContent[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (f.fullContent[0][0] == 406) {
+				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && calcFloor(f.fullContent[0][0]) {
 					f.fullContent[0][0] = 33
 				}
 			}
 		case quadTreeFloor:
 			terrain_quadtree := readFloorFromFile(configuration.Global.FloorFile)
 			if configuration.Global.WaterBlocked {
-				if configuration.Global.CameraMode == 0 && terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] == 406 {
+				if configuration.Global.CameraMode == 0 && calcFloor(terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY]) {
 					terrain_quadtree[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
-				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && (terrain_quadtree[0][0] == 406) {
+				} else if (configuration.Global.CameraMode == 1 || configuration.Global.CameraMode == 2) && calcFloor(terrain_quadtree[0][0]) {
 					terrain_quadtree[0][0] = 33
 				}
 			}
@@ -55,7 +54,6 @@ func (f *Floor) Init() {
 }
 
 func adjustTileStoneSable(floorContent, newFloorContent [][]int, i, j, typeFloor int) {
-	println("in change floor")
 	if i == 0 && j == 0 {
 		if floorContent[i][j+1] != floorContent[i][j] && floorContent[i+1][j] != floorContent[i][j] {
 			newFloorContent[i][j] = floorContent[i][j] + 62 - typeFloor
@@ -374,15 +372,10 @@ func adjustTileStoneSable(floorContent, newFloorContent [][]int, i, j, typeFloor
 func updateFloor(floorContent, newFloorContent [][]int) {
 	for i := 0; i < len(floorContent); i++ {
 		for j := 0; j < len(floorContent[i]); j++ {
-			fmt.Println(i, j)
-			fmt.Println(floorContent)
-			fmt.Println(newFloorContent)
 			switch floorContent[i][j] {
 			case 41, 61:
-				fmt.Println("It's Sable or Stone")
 				adjustTileStoneSable(floorContent, newFloorContent, i, j, 0)
 			case 406:
-				fmt.Println("It's water")
 				adjustTileStoneSable(floorContent, newFloorContent, i, j, 349)
 			}
 		}
@@ -432,7 +425,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 				num, err := strconv.Atoi(part)
 				if err != nil {
 					// Gérer l'erreur, par exemple, imprimer un message
-					fmt.Println("Erreur de conversion en entier:", err)
 					break
 				}
 				tab = append(tab, num)
@@ -494,7 +486,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 			floorContent = append(floorContent, tab)
 		}
 	}
-	fmt.Println(floorContent)
 	// Créer un nouveau tableau avec la même structure
 	newFloorContent := make([][]int, len(floorContent))
 
@@ -503,8 +494,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 		newFloorContent[i] = make([]int, len(innerSlice))
 		copy(newFloorContent[i], innerSlice)
 	}
-
-	fmt.Println(newFloorContent)
 
 	if configuration.Global.EnhanceFloor {
 		updateFloor(floorContent, newFloorContent)

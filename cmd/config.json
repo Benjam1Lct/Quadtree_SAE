@@ -9,11 +9,11 @@
     "CameraMode": 2,
     "FloorKind": 2,
     "FloorFile": "../floor-files/beaupasbeau",
-    "RandomFloor": true,
+    "RandomFloor": false,
     "WidthRandomFloor": 20,
     "HeightRandomFloor":20,
     "WaterBlocked":true,
     "Teleport":true,
     "EnhanceFloor":true,
-    "StartingMenu":true
+    "Animation":true
 }

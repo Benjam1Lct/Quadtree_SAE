@@ -31,4 +31,6 @@ type Character struct {
 	shift               int
 	animationFrameCount int
 	tp                  Teleport
+	animationFlag       int
+	animationCounter    int
 }

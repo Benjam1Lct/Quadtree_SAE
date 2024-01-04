@@ -52,6 +52,7 @@ type Configuration struct {
 	Teleport                      bool
 	LstTeleport                   [][]int
 	StartingMenu                  bool
+	Animation                     bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`
