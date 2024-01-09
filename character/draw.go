@@ -37,12 +37,11 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(float64(xPos), float64(yPos))
-
+	shiftY := c.orientation * configuration.Global.TileSize
 	shiftX := configuration.Global.TileSize
 	if c.moving {
 		shiftX += c.animationStep * configuration.Global.TileSize
 	}
-	shiftY := c.orientation * configuration.Global.TileSize
 
 	screen.DrawImage(assets.CharacterImage.SubImage(
 		image.Rect(shiftX, shiftY, shiftX+configuration.Global.TileSize, shiftY+configuration.Global.TileSize),

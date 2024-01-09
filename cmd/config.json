@@ -6,7 +6,7 @@
     "NumCharacterAnimImages": 4,
     "NumFramePerCharacterAnimImage": 4,
     "NumTileForDebug": 6,
-    "CameraMode": 3,
+    "CameraMode": 2,
     "FloorKind": 2,
     "FloorFile": "../floor-files/validation",
     "RandomFloor": false,
@@ -16,5 +16,5 @@
     "WaterBlocked":true,
     "Teleport":true,
     "EnhanceFloor":true,
-    "Animation":true    
+    "Animation":true
 }

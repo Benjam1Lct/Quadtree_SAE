@@ -33,4 +33,6 @@ type Character struct {
 	tp                  Teleport
 	animationFlag       int
 	animationCounter    int
+	particulesFrame     int
+	particulesCounter   int
 }
