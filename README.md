@@ -46,8 +46,8 @@ Un quadtree divise le terrain en quatre zones, chaque zone étant représentée 
 
 ## Extensions ajoutées
 Génération aléatoire de terrain
-Téléporteurs
 Interdiction de marcher sur l’eau
+Téléporteurs
 Caméra bloquée aux bords du terrain (CameraMode 2)
 Texture ameliorées
 Animation
