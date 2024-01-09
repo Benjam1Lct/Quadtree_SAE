@@ -44,19 +44,13 @@ Un quadtree est une structure de données arborescente où chaque nœud (non feu
 
 Un quadtree divise le terrain en quatre zones, chaque zone étant représentée par un nœud de l'arbre. Chaque nœud non feuille a quatre enfants, représentant les quatre sous-zones de la zone parente. Les zones qui contiennent un seul type de terrain sont représentées par des feuilles qui stockent l'information sur la taille de la zone et le type de terrain.
 
-## Extensions ajouter
+## Extensions ajoutées
 Génération aléatoire de terrain
 Téléporteurs
 Interdiction de marcher sur l’eau
-Caméra bloquée aux bords du terrain
+Caméra bloquée aux bords du terrain (CameraMode 2)
+Texture ameliorées
+Animation
+Camera cinématique (CameraMode 3)
+Sauvegarde de la generation aleatoire du terrain
 
-modification du sprite: changement de personnage et ajout d'animation et de gameplay
-
-## Ajoute d'un menu demmarage et configuration
-choix des parametres de config.json depuis une interface graphique
-choix des maps corespondant au fichier txt disponible avec une preview des maps
-ajout music dans le jeu et bruitage
-choix langue du jeu
-editeur de map
-
-try dual repo

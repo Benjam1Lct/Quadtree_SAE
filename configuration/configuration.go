@@ -51,8 +51,8 @@ type Configuration struct {
 	EnhanceFloor                  bool
 	Teleport                      bool
 	LstTeleport                   [][]int
-	StartingMenu                  bool
 	Animation                     bool
+	SaveRandomFloor               bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`

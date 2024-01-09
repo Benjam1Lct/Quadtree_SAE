@@ -2,9 +2,11 @@ package floor
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
@@ -20,6 +22,38 @@ func (f *Floor) Init() {
 		random_floor := create_random_floor(configuration.Global.WidthRandomFloor, configuration.Global.HeightRandomFloor)
 		writeTerrainToFile(random_floor, "../floor-files/random_floor")
 		terrain := readFloorFromFile("../floor-files/random_floor")
+
+		if configuration.Global.SaveRandomFloor {
+			// Créer un dossier "save" s'il n'existe pas
+			saveDir := "saveFloors"
+			if _, err := os.Stat(saveDir); os.IsNotExist(err) {
+				os.Mkdir(saveDir, os.ModePerm)
+			}
+
+			// Ajouter la date du jour au nom de fichier
+			currentDateTime := time.Now().Format("2006-01-02_15-04-05")
+			fileName := fmt.Sprintf("%s_%s.txt", "randomFloor", currentDateTime)
+			filePath := fmt.Sprintf("%s/%s", saveDir, fileName)
+
+			file, err := os.Create(filePath)
+			if err != nil {
+				fmt.Println("Erreur lors de la création du fichier :", err)
+				return
+			}
+			defer file.Close()
+
+			for _, sublist := range terrain {
+				line := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(sublist)), ","), "[]")
+				_, err := fmt.Fprintln(file, line)
+				if err != nil {
+					fmt.Println("Erreur lors de l'écriture dans le fichier :", err)
+					return
+				}
+			}
+
+			fmt.Printf("Fichier '%s' créé avec succès dans le dossier '%s'.\n", fileName, saveDir)
+		}
+
 		if configuration.Global.WaterBlocked {
 			if configuration.Global.CameraMode == 0 && calcFloor(terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY]) {
 				terrain[configuration.Global.ScreenCenterTileX][configuration.Global.ScreenCenterTileY] = 33
@@ -28,6 +62,7 @@ func (f *Floor) Init() {
 			}
 		}
 		f.quadtreeContent = quadtree.MakeFromArray(terrain)
+
 	} else {
 		switch configuration.Global.FloorKind {
 		case fromFileFloor:
@@ -499,5 +534,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 		updateFloor(floorContent, newFloorContent)
 	}
 
+	fmt.Println(newFloorContent)
 	return newFloorContent
 }
