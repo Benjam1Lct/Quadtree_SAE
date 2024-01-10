@@ -10,11 +10,13 @@ import (
 // de temps, c'est-à-dire tous les 1/60 secondes.
 func (c *Character) Update(blocking [4]bool) {
 
+	// Gestion de l'animation du personnage
 	if configuration.Global.Animation {
 		const animationDelay = 8 // Augmentez ou diminuez cette valeur pour ajuster la vitesse
 
 		c.animationCounter += 1
 
+		// Logique pour changer l'état de l'animation
 		if c.animationCounter >= animationDelay {
 			if c.animationFlag == 1 {
 				c.animationFlag = 2
@@ -27,7 +29,9 @@ func (c *Character) Update(blocking [4]bool) {
 		}
 	}
 
+	// Si le personnage ne bouge pas actuellement
 	if !c.moving {
+		// Gestion des touches pour démarrer le mouvement
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
 			c.orientation = orientedRight
 			if !blocking[1] {
@@ -54,13 +58,17 @@ func (c *Character) Update(blocking [4]bool) {
 			}
 		}
 	} else {
-
+		// Si le personnage est en mouvement
 		c.animationFrameCount++
+
+		// Logique pour avancer le personnage avec animation
 		if c.animationFrameCount >= configuration.Global.NumFramePerCharacterAnimImage {
 			c.animationFrameCount = 0
 			shiftStep := configuration.Global.TileSize / configuration.Global.NumCharacterAnimImages
 			c.shift += shiftStep
 			c.animationStep = -c.animationStep
+
+			// Logique pour terminer le mouvement et mettre à jour les coordonnées
 			if c.shift > configuration.Global.TileSize-shiftStep {
 				c.shift = 0
 				c.moving = false
@@ -71,7 +79,8 @@ func (c *Character) Update(blocking [4]bool) {
 			}
 		}
 	}
-	// gestion des téléporteurs
+
+	// Gestion des téléporteurs
 	if configuration.Global.Teleport {
 		if ebiten.IsKeyPressed(ebiten.KeyT) && c.tp.Tpress {
 			c.tp.create_teleport(c.X, c.Y)

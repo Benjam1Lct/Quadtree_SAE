@@ -59,12 +59,12 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(float64(xPos), float64(yPos))
 
-		// Dessin de l'image du sol sous le téléporteur d'entrée
+		// Dessin du premier drapeau pour le teleporteur
 		screen.DrawImage(assets.FloorImage.SubImage(
 			image.Rect((c.animationFlag-1)*configuration.Global.TileSize, 31*configuration.Global.TileSize, c.animationFlag*configuration.Global.TileSize, 32*configuration.Global.TileSize),
 		).(*ebiten.Image), op)
 
-		// Dessin de l'image du sol sous le téléporteur de sortie s'il est défini
+		// Dessin du deuxieme drapeau pour le teleporteur
 		if c.tp.endX != -1 {
 			xTileForDisplay = c.tp.endX - camX + configuration.Global.ScreenCenterTileX
 			yTileForDisplay = c.tp.endY - camY + configuration.Global.ScreenCenterTileY

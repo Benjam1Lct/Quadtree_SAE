@@ -8,6 +8,7 @@ import (
 // Init met en place un personnage. Pour le moment
 // cela consiste simplement à initialiser une variable
 // responsable de définir l'étape d'animation courante.
+// initialise egalement les points de teleportation et le sprite qui y est lié
 func (c *Character) Init() {
 	c.animationStep = 1
 
