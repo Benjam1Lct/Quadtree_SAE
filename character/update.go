@@ -68,7 +68,6 @@ func (c *Character) Update(blocking [4]bool) {
 				c.Y += c.yInc
 				c.xInc = 0
 				c.yInc = 0
-				c.particulesCounter = 1
 			}
 		}
 	}

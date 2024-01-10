@@ -12,16 +12,22 @@ const (
 // où il se trouve sont exportées, mais vous pourrez
 // ajouter des choses au besoins lors de votre développement.
 //
-// Les champs non exportés sont :
-//   - orientation : l'orientation du personnage (haut, bas, gauche, droite).
-//   - animationStep : l'étape d'animation (-1 ou 1, représentant l'animation
+// Les champs non exportés sont :
+//   - orientation : l'orientation du personnage (haut, bas, gauche, droite).
+//   - animationStep : l'étape d'animation (-1 ou 1, représentant l'animation
 //     d'un pas à gauche ou à droite).
-//   - xInc, yInc : les incréments en X et Y à réaliser après la prochaine animation.
-//   - moving : l'information de si une animation est en cours ou pas.
-//   - shift : la position actuelle en pixels du personnage relativement à ses
+//   - xInc, yInc : les incréments en X et Y à réaliser après la prochaine animation.
+//   - moving : l'information de si une animation est en cours ou pas.
+//   - shift : la position actuelle en pixels du personnage relativement à ses
 //     coordonnées absolues.
-//   - animationFrameCount : le nombre d'appels à update (ou de 1/60 de seconde) qui
+//   - animationFrameCount : le nombre d'appels à update (ou de 1/60 de seconde) qui
 //     ont eu lieu depuis la dernière étape d'animation.
+//   - tp : objet de type Teleport représentant le téléporteur associé au personnage.
+//   - animationFlag : le drapeau d'activation/désactivation de l'animation.
+//   - animationCounter : le compteur d'animations.
+//   - particulesFrame : le nombre d'appels à update (ou de 1/60 de seconde) qui
+//     ont eu lieu depuis la dernière étape de génération de particules.
+//   - particulesCounter : le compteur de particules.
 type Character struct {
 	X, Y                int
 	orientation         int
@@ -33,6 +39,4 @@ type Character struct {
 	tp                  Teleport
 	animationFlag       int
 	animationCounter    int
-	particulesFrame     int
-	particulesCounter   int
 }

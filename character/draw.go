@@ -11,14 +11,13 @@ import (
 
 // Draw permet d'afficher le personnage dans une *ebiten.Image
 // (en pratique, celle qui représente la fenêtre de jeu) en
-// fonction des charactéristiques du personnage (position, orientation,
+// fonction des caractéristiques du personnage (position, orientation,
 // étape d'animation, etc) et de la position de la caméra (le personnage
 // est affiché relativement à la caméra).
-
 func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 
-	xShift := 0
-	yShift := 0
+	// Calcul des décalages en fonction de l'orientation et de l'étape d'animation
+	xShift, yShift := 0, 0
 	switch c.orientation {
 	case orientedDown:
 		yShift = c.shift
@@ -30,11 +29,13 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		xShift = c.shift
 	}
 
+	// Calcul des coordonnées de l'image du personnage sur l'écran
 	xTileForDisplay := c.X - camX + configuration.Global.ScreenCenterTileX
 	yTileForDisplay := c.Y - camY + configuration.Global.ScreenCenterTileY
 	xPos := (xTileForDisplay)*configuration.Global.TileSize + xShift
 	yPos := (yTileForDisplay)*configuration.Global.TileSize - configuration.Global.TileSize/2 + 2 + yShift
 
+	// Configuration des options de dessin
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(float64(xPos), float64(yPos))
 	shiftY := c.orientation * configuration.Global.TileSize
@@ -43,10 +44,12 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		shiftX += c.animationStep * configuration.Global.TileSize
 	}
 
+	// Dessin de l'image du personnage sur l'écran
 	screen.DrawImage(assets.CharacterImage.SubImage(
 		image.Rect(shiftX, shiftY, shiftX+configuration.Global.TileSize, shiftY+configuration.Global.TileSize),
 	).(*ebiten.Image), op)
 
+	// Dessin du téléporteur s'il est activé
 	if configuration.Global.Teleport && c.tp.enterX != -1 {
 		xTileForDisplay := c.tp.enterX - camX + configuration.Global.ScreenCenterTileX
 		yTileForDisplay := c.tp.enterY - camY + configuration.Global.ScreenCenterTileY
@@ -56,10 +59,12 @@ func (c Character) Draw(screen *ebiten.Image, camX, camY int) {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(float64(xPos), float64(yPos))
 
+		// Dessin de l'image du sol sous le téléporteur d'entrée
 		screen.DrawImage(assets.FloorImage.SubImage(
 			image.Rect((c.animationFlag-1)*configuration.Global.TileSize, 31*configuration.Global.TileSize, c.animationFlag*configuration.Global.TileSize, 32*configuration.Global.TileSize),
 		).(*ebiten.Image), op)
 
+		// Dessin de l'image du sol sous le téléporteur de sortie s'il est défini
 		if c.tp.endX != -1 {
 			xTileForDisplay = c.tp.endX - camX + configuration.Global.ScreenCenterTileX
 			yTileForDisplay = c.tp.endY - camY + configuration.Global.ScreenCenterTileY

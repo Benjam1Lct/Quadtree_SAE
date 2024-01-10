@@ -10,24 +10,35 @@ import (
 // du jeu. Pour ajouter un élèment de configuration il
 // suffit d'ajouter un champs dans cette structure.
 //
-// Les champs directement lus dans le fichier de configuration sont :
+// Les champs directement lus dans le fichier de configuration sont :
 //   - DebugMode : indique si on est en mode debug ou pas
-//   - NumTileX, NumTileY : les nombres de cases affichées à l'écran
+//   - NumTileX, NumTileY : les nombres de cases affichées à l'écran
 //     en largeur et hauteur.
-//   - TileSize : la taille en pixels du côté d'une case.
-//   - NumCharacterAnimImages : le nombre de d'images de l'animation du
+//   - TileSize : la taille en pixels du côté d'une case.
+//   - NumCharacterAnimImages : le nombre d'images de l'animation du
 //     personnage.
 //   - NumFramePerCharacterAnimImage : le nombre d'appels à update ou
 //     de 1/60 de seconde) qui ont lieu entre deux images de l'animation
 //     du personnage.
 //   - NumTileForDebug : le nombre de cases à ajouter à droite de l'écran
 //     pour afficher les informations de debug
-//   - CameraMode : le type de caméra à utiliser (0 pour une caméra fixe
-//     et 1 pour une caméra qui suit le personnage).
+//   - CameraMode : le type de caméra à utiliser
+//     (0 pour une caméra fixe
+//     1 pour une caméra qui suit le personnage
+//     2 pour une caméra bloqué au bord du terrain
+//     3 pour une caméra cinématique).
 //   - FloorKind : détermine la méthode à utiliser pour afficher le terrain
 //     (quadrillage, lecture dans un fichier, quadtree, etc)
 //   - FloorFile : le chemin d'un fichier où lire les informations sur le
 //     terrain si nécessaire
+//   - RandomFloor : active la génération aléatoire du terrain
+//   - WidthRandomFloor, HeightRandomFloor : dimensions du terrain généré aléatoirement
+//   - WaterBlocked : indique si le mouvement à travers l'eau est bloqué
+//   - EnhanceFloor : active l'amélioration automatique du terrain
+//   - Teleport : active la présence de téléporteurs sur le terrain
+//   - LstTeleport : liste des coordonnées des téléporteurs [x, y]
+//   - Animation : active ou désactive les animations
+//   - SaveRandomFloor : active la sauvegarde du terrain généré aléatoirement
 //
 // Les champs calculés à partir des précédents sont :
 //   - ScreenWidth, ScreenHeight : la largeur et la hauteur de l'écran
