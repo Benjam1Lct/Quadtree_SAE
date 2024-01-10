@@ -25,9 +25,6 @@ const (
 //   - tp : objet de type Teleport représentant le téléporteur associé au personnage.
 //   - animationFlag : le drapeau d'activation/désactivation de l'animation.
 //   - animationCounter : le compteur d'animations.
-//   - particulesFrame : le nombre d'appels à update (ou de 1/60 de seconde) qui
-//     ont eu lieu depuis la dernière étape de génération de particules.
-//   - particulesCounter : le compteur de particules.
 type Character struct {
 	X, Y                int
 	orientation         int
