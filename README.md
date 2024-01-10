@@ -44,88 +44,13 @@ Un quadtree est une structure de données arborescente où chaque nœud (non feu
 
 Un quadtree divise le terrain en quatre zones, chaque zone étant représentée par un nœud de l'arbre. Chaque nœud non feuille a quatre enfants, représentant les quatre sous-zones de la zone parente. Les zones qui contiennent un seul type de terrain sont représentées par des feuilles qui stockent l'information sur la taille de la zone et le type de terrain.
 
-## Extensions ajouter
+## Extensions ajoutées
 Génération aléatoire de terrain
-Téléporteurs
 Interdiction de marcher sur l’eau
-Caméra bloquée aux bords du terrain
+Téléporteurs
+Caméra bloquée aux bords du terrain (CameraMode 2)
+Texture ameliorées
+Animation
+Camera cinématique (CameraMode 3)
+Sauvegarde de la generation aleatoire du terrain
 
-modification du sprite: changement de personnage et ajout d'animation et de gameplay
-
-## Ajoute d'un menu demmarage et configuration
-choix des parametres de config.json depuis une interface graphique
-choix des maps corespondant au fichier txt disponible avec une preview des maps
-ajout music dans le jeu et bruitage
-choix langue du jeu
-editeur de map
-
-
-
-
-if floorContent[i][j] == 41 && floorContent[i][j-1] != 41 && floorContent[i-1][j] != 41 && floorContent[i+1][j] != 41 && floorContent[i][j+1] != 41 {
-						newFloorContent[i][j] = 103
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i+1][j+1] == 41 && floorContent[i+1][j-1] == 41 && floorContent[i-1][j-1] == 41 && floorContent[i-1][j+1] == 41 {
-						newFloorContent[i][j] = 41
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 {
-						newFloorContent[i][j] = 37
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i][j+1] == 41 {
-						if floorContent[i-1][j+1] == 41 && floorContent[i-1][j-1] == 41 {
-							newFloorContent[i][j] = 228
-						} else {
-							newFloorContent[i][j] = 69
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i+1][j] == 41 && floorContent[i][j+1] == 41 {
-						if floorContent[i+1][j-1] == 41 && floorContent[i+1][j+1] == 41 {
-							newFloorContent[i][j] = 197
-						} else {
-							newFloorContent[i][j] = 5
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 {
-						if floorContent[i+1][j-1] == 41 && floorContent[i-1][j-1] == 41 {
-							newFloorContent[i][j] = 229
-						} else {
-							newFloorContent[i][j] = 38
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i-1][j] == 41 && floorContent[i+1][j] == 41 {
-						if floorContent[i+1][j+1] == 41 && floorContent[i-1][j+1] == 41 {
-							newFloorContent[i][j] = 196
-						} else {
-							newFloorContent[i][j] = 36
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i+1][j] == 41 {
-						if floorContent[i+1][j-1] == 41 {
-							newFloorContent[i][j] = 199
-						} else {
-							newFloorContent[i][j] = 6
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 && floorContent[i-1][j] == 41 {
-						if floorContent[i-1][j-1] == 41 {
-							newFloorContent[i][j] = 231
-						} else {
-							newFloorContent[i][j] = 70
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i+1][j] == 41 {
-						if floorContent[i+1][j+1] == 41 {
-							newFloorContent[i][j] = 198
-						} else {
-							newFloorContent[i][j] = 4
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i-1][j] == 41 {
-						if floorContent[i-1][j+1] == 41 {
-							newFloorContent[i][j] = 230
-						} else {
-							newFloorContent[i][j] = 68
-						}
-					} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 && floorContent[i][j-1] == 41 {
-						newFloorContent[i][j] = 101
-					} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 && floorContent[i-1][j] == 41 {
-						newFloorContent[i][j] = 39
-					} else if floorContent[i][j] == 41 && floorContent[i-1][j] == 41 {
-						newFloorContent[i][j] = 7
-					} else if floorContent[i][j] == 41 && floorContent[i+1][j] == 41 {
-						newFloorContent[i][j] = 71
-					} else if floorContent[i][j] == 41 && floorContent[i][j-1] == 41 {
-						newFloorContent[i][j] = 102
-					} else if floorContent[i][j] == 41 && floorContent[i][j+1] == 41 {
-						newFloorContent[i][j] = 100
-					}

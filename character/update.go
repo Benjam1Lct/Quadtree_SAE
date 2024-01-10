@@ -10,6 +10,23 @@ import (
 // de temps, c'est-à-dire tous les 1/60 secondes.
 func (c *Character) Update(blocking [4]bool) {
 
+	if configuration.Global.Animation {
+		const animationDelay = 8 // Augmentez ou diminuez cette valeur pour ajuster la vitesse
+
+		c.animationCounter += 1
+
+		if c.animationCounter >= animationDelay {
+			if c.animationFlag == 1 {
+				c.animationFlag = 2
+			} else if c.animationFlag == 2 {
+				c.animationFlag = 3
+			} else if c.animationFlag == 3 {
+				c.animationFlag = 1
+			}
+			c.animationCounter = 0
+		}
+	}
+
 	if !c.moving {
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
 			c.orientation = orientedRight
@@ -37,6 +54,7 @@ func (c *Character) Update(blocking [4]bool) {
 			}
 		}
 	} else {
+
 		c.animationFrameCount++
 		if c.animationFrameCount >= configuration.Global.NumFramePerCharacterAnimImage {
 			c.animationFrameCount = 0

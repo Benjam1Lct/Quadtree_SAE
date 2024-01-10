@@ -11,6 +11,7 @@ import (
 
 // Draw affiche dans une image (en général, celle qui représente l'écran),
 // la partie du sol qui est visible (qui doit avoir été calculée avec Get avant).
+// du au changement des assets des textures du sol il s'agit maintenant d'un cadrillage de 32x32 donc il est necessere d'effectuer des operations afin de revenenir a une tuile simple
 func (f Floor) Draw(screen *ebiten.Image) {
 	for y := range f.content {
 		for x := range f.content[y] {

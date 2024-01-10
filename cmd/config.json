@@ -6,13 +6,15 @@
     "NumCharacterAnimImages": 4,
     "NumFramePerCharacterAnimImage": 4,
     "NumTileForDebug": 6,
-    "CameraMode": 1,
-    "FloorKind": 3,
-    "FloorFile": "../floor-files/test-sphereworld",
+    "CameraMode": 2,
+    "FloorKind": 2,
+    "FloorFile": "../floor-files/newdesign",
     "RandomFloor": false,
+    "SaveRandomFloor": false,
     "WidthRandomFloor": 20,
     "HeightRandomFloor":20,
-    "WaterBlocked":false,
+    "WaterBlocked":true,
     "Teleport":true,
-    "EnhanceFloor": false
+    "EnhanceFloor":true,
+    "Animation":true
 }

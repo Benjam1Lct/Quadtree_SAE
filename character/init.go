@@ -16,5 +16,7 @@ func (c *Character) Init() {
 		c.Y = configuration.Global.ScreenCenterTileY
 	}
 
+	c.animationFlag = 1
+
 	c.tp = Init_Teleport()
 }

@@ -15,6 +15,8 @@ func (c *Camera) Update(characterPosX, characterPosY int) {
 		c.updateFollowCharacter(characterPosX, characterPosY)
 	case NoVoid:
 		c.updateNoVoid(characterPosX, characterPosY)
+	case MovieCamera:
+		c.updateMovieCamera(characterPosX, characterPosY)
 	}
 }
 
@@ -46,4 +48,21 @@ func clamp(value, min, max int) int {
 		return max
 	}
 	return value
+}
+
+func (c *Camera) updateMovieCamera(characterPosX, characterPosY int) {
+	spaceBeforeMove := 2
+
+	diffCamCharX := characterPosX - c.X
+	diffCamCharY := characterPosY - c.Y
+
+	if diffCamCharX > spaceBeforeMove || diffCamCharX < -spaceBeforeMove {
+		c.X = characterPosX
+		c.Y = characterPosY
+	}
+
+	if diffCamCharY > spaceBeforeMove || diffCamCharY < -spaceBeforeMove {
+		c.X = characterPosX
+		c.Y = characterPosY
+	}
 }

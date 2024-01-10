@@ -15,4 +15,5 @@ const (
 	Static int = iota
 	FollowCharacter
 	NoVoid
+	MovieCamera
 )

@@ -2,7 +2,6 @@ package camera
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 
@@ -65,8 +64,6 @@ func (c *Camera) Init() {
 				Height = Height + 1
 			}
 		}
-
-		fmt.Println(maxWidth, Height)
 
 		c.MapSizeX = maxWidth - 1
 		c.MapSizeY = Height - 1
