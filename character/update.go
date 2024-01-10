@@ -71,11 +71,11 @@ func (c *Character) Update(blocking [4]bool) {
 			}
 		}
 	}
+	// gestion des téléporteurs
 	if configuration.Global.Teleport {
 		if ebiten.IsKeyPressed(ebiten.KeyT) && c.tp.Tpress {
 			c.tp.create_teleport(c.X, c.Y)
 			c.tp.Tpress = false
-
 		}
 		if (c.X == c.tp.enterX && c.Y == c.tp.enterY) && !c.tp.onPortal && c.tp.endX != -1 {
 			c.X, c.Y = c.tp.endX, c.tp.endY

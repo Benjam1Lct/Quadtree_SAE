@@ -13,6 +13,11 @@ func (f Floor) Blocking(characterXPos, characterYPos, camXPos, camYPos int) (blo
 	relativeXPos := characterXPos - camXPos + configuration.Global.ScreenCenterTileX
 	relativeYPos := characterYPos - camYPos + configuration.Global.ScreenCenterTileY
 
+	// Extension waterblock
+	// l'extension permet de bloquer le personnage lorsqu'il rencontre une case qui est de l'eau
+	// la méthode permet déjà de bloquer le personnage sur les cases vides (-1), ainsi
+	// nous avons juste à faire en sorte que le personnage soit aussi bloqué sur les cases d'eaux (ici 4).
+
 	if configuration.Global.WaterBlocked {
 		blocking[0] = relativeYPos <= 0 || f.content[relativeYPos-1][relativeXPos] == -1 || calcFloor(f.content[relativeYPos-1][relativeXPos])
 		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.content[relativeYPos][relativeXPos+1] == -1 || calcFloor(f.content[relativeYPos][relativeXPos+1])
