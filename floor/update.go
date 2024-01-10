@@ -1,6 +1,8 @@
 package floor
 
 import (
+	"math"
+
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 )
 
@@ -22,6 +24,8 @@ func (f *Floor) Update(camXPos, camYPos int) {
 			f.updateFromFileFloor(camXPos, camYPos)
 		case quadTreeFloor:
 			f.updateQuadtreeFloor(camXPos, camYPos)
+		case SphereWorld:
+			f.updateSphereWorld(camXPos, camYPos)
 		}
 	}
 }
@@ -68,6 +72,7 @@ func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
 			}
 		}
 	}
+
 }
 
 // le sol est récupéré depuis un quadtree, qui a été lu dans un fichier
@@ -75,4 +80,19 @@ func (f *Floor) updateQuadtreeFloor(camXPos, camYPos int) {
 	topLeftX := camXPos - configuration.Global.ScreenCenterTileX
 	topLeftY := camYPos - configuration.Global.ScreenCenterTileY
 	f.quadtreeContent.GetContent(topLeftX, topLeftY, f.content)
+}
+
+func (f *Floor) updateSphereWorld(camXPos, camYPos int) {
+	f.updateFromFileFloor(camXPos, camYPos)
+	for i := 0; i < len(f.content); i++ {
+		for j := 0; j < len(f.content[0]); j++ {
+			if f.content[i][j] == -1 {
+				new_x := (int(math.Abs(float64(camXPos))) - int(math.Abs(float64(camXPos)))/2 + i) % len(f.fullContent)
+				new_y := (int(math.Abs(float64(camYPos))) - int(math.Abs(float64(camYPos)))/2 + j) % len(f.fullContent[0])
+
+				f.content[i][j] = f.fullContent[new_y][new_x]
+			}
+		}
+	}
+
 }

@@ -50,7 +50,6 @@ type Configuration struct {
 	WaterBlocked                  bool
 	EnhanceFloor                  bool
 	Teleport                      bool
-	LstTeleport                   [][]int
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`

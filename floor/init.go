@@ -51,7 +51,10 @@ func (f *Floor) Init() {
 				}
 			}
 			f.quadtreeContent = quadtree.MakeFromArray(terrain_quadtree)
+		case SphereWorld:
+			f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
 		}
+
 	}
 }
 
