@@ -333,20 +333,140 @@ func adjustTilesWood(floorContent, newFloorContent [][]int, i, j int) {
 			newFloorContent[i][j] = 721
 		}
 	} else if i == 0 && j == len(floorContent[i])-1 {
-
+		if floorContent[i+1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 753
+		} else if floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 720
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		}
 	} else if i == len(floorContent)-1 && j == 0 {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i][j+1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 723
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		} else if floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 721
+		}
 	} else if i == len(floorContent)-1 && j == len(floorContent[i])-1 {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 752
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		}
 	} else if i == 0 {
-
+		if floorContent[i+1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] && floorContent[i][j+1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 785
+		} else if floorContent[i][j-1] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 818
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 754
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 753
+		} else if floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 721
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		} else if floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 720
+		}
 	} else if j == 0 {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i+1][j] != floorContent[i][j] && floorContent[i][j+1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 784
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 817
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 723
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 754
+		} else if floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 720
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 721
+		}
 	} else if i == len(floorContent)-1 {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] && floorContent[i][j+1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 787
+		} else if floorContent[i][j-1] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 818
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 723
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 752
+		} else if floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 721
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		}
 	} else if j == len(floorContent[i])-1 {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i+1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 786
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 817
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 752
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 753
+		} else if floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 720
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		}
 	} else {
-
+		if floorContent[i-1][j] != floorContent[i][j] && floorContent[i+1][j] != floorContent[i][j] && floorContent[i][j-1] != floorContent[i][j] && floorContent[i][j+1] != floorContent[i][j] {
+			newFloorContent[i][j] = 755
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 657
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 786
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 784
+		} else if floorContent[i+1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 785
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i][j+1] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 787
+		} else if floorContent[i-1][j] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 817
+		} else if floorContent[i][j+1] == floorContent[i][j] && floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 818
+		} else if floorContent[i][j+1] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 754
+		} else if floorContent[i][j+1] == floorContent[i][j] && floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 723
+		} else if floorContent[i][j-1] == floorContent[i][j] && floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 753
+		} else if floorContent[i][j-1] == floorContent[i][j] && floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 752
+		} else if floorContent[i][j-1] == floorContent[i][j] {
+			newFloorContent[i][j] = 722
+		} else if floorContent[i][j+1] == floorContent[i][j] {
+			newFloorContent[i][j] = 721
+		} else if floorContent[i+1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 720
+		} else if floorContent[i-1][j] == floorContent[i][j] {
+			newFloorContent[i][j] = 816
+		}
 	}
 }
